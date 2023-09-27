@@ -1,7 +1,8 @@
 // 1. npm init -y
 // 2. npm install redux || npm install redux react-redux
 
-const redux = require('redux'); // importing redux
+const redux = require('redux'); // importing redux using node
+// import redux, { createStore} from 'redux'; // importing from react
 
 // 4. reducer function, add default value to avoid error "undefined properties"
 const counterReducer = (state = { counter: 0 }, action) => {
