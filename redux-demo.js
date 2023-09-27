@@ -1,5 +1,5 @@
 // 1. npm init -y
-// 2. npm install redux
+// 2. npm install redux || npm install redux react-redux
 
 const redux = require('redux'); // importing redux
 
