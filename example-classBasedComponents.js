@@ -1,3 +1,6 @@
+// added
+// import { Component } from 'react';
+// import { connect } from "react-redux";
 import { Component } from 'react';
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch, connect } from "react-redux";
