@@ -1,3 +1,5 @@
+// npm install @reduxjs/toolkit // install redux toolkit
+------------------------------
 // 1. npm init -y
 // 2. npm install redux || npm install redux react-redux
 
