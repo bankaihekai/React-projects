@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Details from "./Details";
 import Map from "./Map";
 import { IoSearch, IoHeartOutline, IoHeartSharp  } from "react-icons/io5";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import "./Weather.css";
+import { StatusContext } from "./main";
 
 function Weather() {
   const { cityName } = useParams();
@@ -17,7 +19,9 @@ function Weather() {
     const storedHeartCount = localStorage.getItem("heartCount");
     return storedHeartCount ? parseInt(storedHeartCount, 10) : 0;
   });
-
+  const [showPlusOne, setShowPlusOne] = useState(false);
+  const [logStatus, setLogStatus] = useContext(StatusContext);
+  console.log(logStatus);
   useEffect(() => {
     const fetch_API_Data = async () => {
       try {
@@ -56,6 +60,11 @@ function Weather() {
     const newHeartCount = heartCount === 0 ? 1 : 0; 
     setHeartCount(newHeartCount);
     localStorage.setItem("heartCount", newHeartCount.toString());
+    if(newHeartCount==1){
+        setShowPlusOne(true); // Show "+1" message
+        setTimeout(() => setShowPlusOne(false), 1000);
+    }
+    
   };
 
   return (
@@ -78,6 +87,7 @@ function Weather() {
           <button className="border-0 bg-transparent" onClick={likeHeart}>
             {heartCount <= 0 ? <IoHeartOutline className="fs-5" /> : <IoHeartSharp className="fs-5" style={{ color: '#FF69B4'}}/>}
           </button>
+          {showPlusOne && <div className="plus-one">+1</div>} {/* "+1" message */}
         </div>
       </div>
       {weatherData ? (

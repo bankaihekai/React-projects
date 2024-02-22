@@ -1,0 +1,14 @@
+.plus-one {
+    position: absolute;
+    font-size: 14px;
+    top: -.5px;
+    color: rgb(0, 0, 0);
+    animation: fadeInOut 1s ease-in-out;
+  }
+  
+  @keyframes fadeInOut {
+    0% { opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  

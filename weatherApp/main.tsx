@@ -1,31 +1,41 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React, { createContext, useState } from "react";
+import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App from './App.tsx'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PageNotFound from './PageNotFound.tsx';
-import Weather from './Weather.tsx';
+import App from "./App.tsx";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PageNotFound from "./PageNotFound.tsx";
+import Weather from "./Weather.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     errorElement: <PageNotFound />,
   },
   {
-    path: '/weather/:cityName',
+    path: "/weather/:cityName",
     element: <Weather />,
   },
   {
-    path: '/weather',
+    path: "/weather",
     element: <Weather />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+export const StatusContext = createContext<[boolean, React.Dispatch<React.SetStateAction<boolean>>]>([false, () => {}]); 
+
+const Root = () => {
+  const [logStatus, setLogStatus] = useState(false); 
+
+  return (
+    <React.StrictMode>
+      {/* <App /> */}
+      <StatusContext.Provider value={[logStatus, setLogStatus]}>
+        <RouterProvider router={router} />
+      </StatusContext.Provider>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.render(<Root />, document.getElementById("root"));
